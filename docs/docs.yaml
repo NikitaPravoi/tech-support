@@ -1,0 +1,1343 @@
+components:
+  schemas:
+    CreateProjectInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/CreateProjectInputBody.json
+          format: uri
+          readOnly: true
+          type: string
+        description:
+          description: Project description
+          examples:
+            - My favourite project
+          type:
+            - string
+            - "null"
+        name:
+          description: Project name
+          examples:
+            - Project
+          type: string
+      required:
+        - name
+        - description
+      type: object
+    CreateRoleInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/CreateRoleInputBody.json
+          format: uri
+          readOnly: true
+          type: string
+        description:
+          description: Role description
+          examples:
+            - Admin
+          type: string
+        name:
+          description: Role name
+          examples:
+            - Project
+          type: string
+      required:
+        - name
+        - description
+      type: object
+    CreateSupportTicketInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/CreateSupportTicketInputBody.json
+          format: uri
+          readOnly: true
+          type: string
+        created_by:
+          description: Tickets author
+          examples:
+            - Dispatcher Chelyabinsk
+          type: string
+        description:
+          description: Description of a ticket
+          examples:
+            - some kind of long message
+          type:
+            - string
+            - "null"
+        project_id:
+          description: Project to assign to
+          examples:
+            - 1
+          format: int64
+          type: integer
+        title:
+          description: Title of a ticket
+          examples:
+            - Authorization
+          type: string
+      required:
+        - project_id
+        - title
+        - description
+        - created_by
+      type: object
+    CreateUserInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/CreateUserInputBody.json
+          format: uri
+          readOnly: true
+          type: string
+        email:
+          description: User email
+          examples:
+            - admin@admin.com
+          format: email
+          type: string
+        login:
+          description: User login
+          maxLength: 50
+          type: string
+        password:
+          description: User password
+          maxLength: 50
+          type: string
+        role_id:
+          description: User role id
+          examples:
+            - 1
+          format: int64
+          type: integer
+      required:
+        - login
+        - email
+        - password
+        - role_id
+      type: object
+    CreateUserProjectInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/CreateUserProjectInputBody.json
+          format: uri
+          readOnly: true
+          type: string
+        project_id:
+          description: ID of the project
+          examples:
+            - 1
+          format: int64
+          type: integer
+        user_id:
+          description: ID of the user
+          examples:
+            - 1
+          format: int64
+          type: integer
+      required:
+        - user_id
+        - project_id
+      type: object
+    ErrorDetail:
+      additionalProperties: false
+      properties:
+        location:
+          description: Where the error occurred, e.g. 'body.items[3].tags' or 'path.thing-id'
+          type: string
+        message:
+          description: Error message text
+          type: string
+        value:
+          description: The value at the given location
+      type: object
+    ErrorModel:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/ErrorModel.json
+          format: uri
+          readOnly: true
+          type: string
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.
+          examples:
+            - Property foo is required but is missing.
+          type: string
+        errors:
+          description: Optional list of individual error details
+          items:
+            $ref: "#/components/schemas/ErrorDetail"
+          type:
+            - array
+            - "null"
+        instance:
+          description: A URI reference that identifies the specific occurrence of the problem.
+          examples:
+            - https://example.com/error-log/abc123
+          format: uri
+          type: string
+        status:
+          description: HTTP status code
+          examples:
+            - 400
+          format: int64
+          type: integer
+        title:
+          description: A short, human-readable summary of the problem type. This value should not change between occurrences of the error.
+          examples:
+            - Bad Request
+          type: string
+        type:
+          default: about:blank
+          description: A URI reference to human-readable documentation for the error.
+          examples:
+            - https://example.com/errors/example
+          format: uri
+          type: string
+      type: object
+    LoginInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/LoginInputBody.json
+          format: uri
+          readOnly: true
+          type: string
+        login:
+          description: User login
+          examples:
+            - admin
+          type: string
+        password:
+          description: User password
+          examples:
+            - admin
+          type: string
+      required:
+        - login
+        - password
+      type: object
+    Project:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/Project.json
+          format: uri
+          readOnly: true
+          type: string
+        description:
+          description: Project description
+          examples:
+            - This is my favourite project
+          type:
+            - string
+            - "null"
+        id:
+          examples:
+            - 1
+          format: int64
+          type: integer
+        name:
+          description: Project name
+          examples:
+            - Tech-support
+          type: string
+      required:
+        - id
+        - name
+        - description
+      type: object
+    Role:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/Role.json
+          format: uri
+          readOnly: true
+          type: string
+        description:
+          description: Role description
+          examples:
+            - This is a system admin
+          type: string
+        id:
+          description: ID of the role
+          examples:
+            - 1
+          format: int64
+          type: integer
+        name:
+          description: Role name
+          examples:
+            - System admin
+          type: string
+      required:
+        - id
+        - name
+        - description
+      type: object
+    Session:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/Session.json
+          format: uri
+          readOnly: true
+          type: string
+        created_at:
+          description: Create Date
+          format: date-time
+          type: string
+        expires_at:
+          description: Expires Date
+          format: date-time
+          type: string
+        id:
+          description: Session ID
+          examples:
+            - 1
+          format: int64
+          type: integer
+        token:
+          description: Token
+          examples:
+            - 1430686b877ab3d9e5ad4dff66b16e62f378dabd96d3ab7b6f00e2b5e1ff47c8
+          type: string
+        user_id:
+          description: User ID
+          examples:
+            - 1
+          format: int64
+          type: integer
+      required:
+        - id
+        - user_id
+        - token
+        - created_at
+        - expires_at
+      type: object
+    SuccessOutputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/SuccessOutputBody.json
+          format: uri
+          readOnly: true
+          type: string
+        success:
+          description: Status of succession
+          examples:
+            - true
+          type: boolean
+      required:
+        - success
+      type: object
+    SupportTicket:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/SupportTicket.json
+          format: uri
+          readOnly: true
+          type: string
+        answer:
+          description: Answer of the support ticket
+          examples:
+            - You are an idiot.
+          type:
+            - string
+            - "null"
+        answered_by:
+          description: Who answered the support ticket
+          examples:
+            - 1
+          format: int64
+          type:
+            - integer
+            - "null"
+        created_at:
+          description: Created time of the support ticket
+          format: date-time
+          type: string
+        created_by:
+          description: Creator of the support ticket
+          examples:
+            - Dispatcher
+          type: string
+        description:
+          description: Description of the support ticket
+          examples:
+            - Step-bro help me, i'm stuck!
+          type:
+            - string
+            - "null"
+        id:
+          description: ID of the support ticket
+          examples:
+            - 1
+          format: int64
+          type: integer
+        project_id:
+          description: ID of the project
+          examples:
+            - 1
+          format: int64
+          type: integer
+        status_id:
+          description: ID of the status of the support ticket
+          examples:
+            - 1
+          format: int64
+          type: integer
+        title:
+          description: Title of the support ticket
+          examples:
+            - Stuck in a washing machine
+          type: string
+        updated_at:
+          description: Updated time of the support ticket
+          format: date-time
+          type: string
+      required:
+        - id
+        - project_id
+        - status_id
+        - title
+        - description
+        - created_at
+        - updated_at
+        - created_by
+        - answer
+        - answered_by
+      type: object
+    UpdateProjectInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/UpdateProjectInputBody.json
+          format: uri
+          readOnly: true
+          type: string
+        description:
+          description: Project description
+          examples:
+            - My favourite project
+          type:
+            - string
+            - "null"
+        name:
+          description: Project name
+          examples:
+            - Project
+          type: string
+      required:
+        - name
+        - description
+      type: object
+    UpdateRoleInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/UpdateRoleInputBody.json
+          format: uri
+          readOnly: true
+          type: string
+        description:
+          description: Role description
+          examples:
+            - Admin
+          type: string
+        name:
+          description: Role name
+          examples:
+            - Project
+          type: string
+      required:
+        - name
+        - description
+      type: object
+    UpdateSupportTicketInputBody:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/UpdateSupportTicketInputBody.json
+          format: uri
+          readOnly: true
+          type: string
+        created_by:
+          format: date-time
+          type: string
+        description:
+          description: Description of a ticket
+          examples:
+            - Sample description
+          type:
+            - string
+            - "null"
+        project_id:
+          description: Project ID
+          examples:
+            - 1
+          format: int64
+          type: integer
+        status_id:
+          description: " Status ID"
+          examples:
+            - 1
+          format: int64
+          type: integer
+        title:
+          description: Title of a ticket
+          examples:
+            - Sample Title
+          type: string
+      required:
+        - project_id
+        - status_id
+        - title
+        - description
+        - created_by
+      type: object
+    User:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/User.json
+          format: uri
+          readOnly: true
+          type: string
+        email:
+          description: User email
+          examples:
+            - admin@admin.com
+          format: email
+          type: string
+        id:
+          description: User id
+          examples:
+            - 1
+          format: int64
+          type: integer
+        login:
+          description: User login
+          examples:
+            - admin
+          type: string
+        password:
+          description: User password
+          examples:
+            - User password
+          type: string
+        role_id:
+          description: User role id
+          examples:
+            - 1
+          format: int64
+          type: integer
+      required:
+        - id
+        - login
+        - email
+        - password
+        - role_id
+      type: object
+    UserProject:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/UserProject.json
+          format: uri
+          readOnly: true
+          type: string
+        id:
+          description: ID of the user project binding
+          examples:
+            - 1
+          format: int64
+          type: integer
+        project_id:
+          description: ID of the project
+          examples:
+            - 1
+          format: int64
+          type: integer
+        user_id:
+          description: ID of the user
+          examples:
+            - 1
+          format: int64
+          type: integer
+      required:
+        - id
+        - user_id
+        - project_id
+      type: object
+    UserWithRoleInfo:
+      additionalProperties: false
+      properties:
+        $schema:
+          description: A URL to the JSON Schema for this object.
+          examples:
+            - https://example.com/schemas/UserWithRoleInfo.json
+          format: uri
+          readOnly: true
+          type: string
+        email:
+          description: User email
+          format: email
+          type: string
+        id:
+          description: ID of the user
+          examples:
+            - 1
+          format: int64
+          type: integer
+        role:
+          description: User role
+          type: string
+      required:
+        - id
+        - email
+        - role
+      type: object
+  securitySchemes:
+    auth:
+      bearerFormat: JWT
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com/login
+          scopes:
+            auth: basic auth
+          tokenUrl: ""
+      scheme: bearer
+      type: http
+info:
+  title: tech-support
+  version: 1.0.0
+openapi: 3.1.0
+paths:
+  /admin/project:
+    post:
+      description: Create project that requires support tickets
+      operationId: create-project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProjectInputBody"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Create project
+      tags:
+        - Project
+  /admin/project/{id}:
+    delete:
+      description: Delete support project
+      operationId: delete-project
+      parameters:
+        - description: ID
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            description: ID
+            examples:
+              - 1
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessOutputBody"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Delete project
+      tags:
+        - Project
+    put:
+      description: Update support project
+      operationId: update-project
+      parameters:
+        - description: ID
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            description: ID
+            examples:
+              - 1
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProjectInputBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Update project
+      tags:
+        - Project
+  /admin/role:
+    get:
+      description: Get support role
+      operationId: list-Roles
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Role"
+                type:
+                  - array
+                  - "null"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: List role
+      tags:
+        - Roles
+    post:
+      description: Create new role
+      operationId: create-role
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRoleInputBody"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Role"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Create role
+      tags:
+        - Roles
+  /admin/role/{id}:
+    delete:
+      description: Delete support role
+      operationId: list-role
+      parameters:
+        - description: ID
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            description: ID
+            examples:
+              - 1
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessOutputBody"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Delete role
+      tags:
+        - Roles
+    put:
+      description: Update support role
+      operationId: update-role
+      parameters:
+        - description: ID
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            description: ID
+            examples:
+              - 1
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateRoleInputBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Role"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Update role
+      tags:
+        - Roles
+  /admin/user-project:
+    post:
+      description: Create user project binding
+      operationId: create-user-project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserProjectInputBody"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserProject"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Create user project
+      tags:
+        - User
+        - Project
+  /admin/user-project/{id}:
+    delete:
+      description: Delete user project binding
+      operationId: delete-user-project
+      parameters:
+        - description: Project ID
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            description: Project ID
+            examples:
+              - 1
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessOutputBody"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Delete user project
+      tags:
+        - User
+        - Project
+  /login:
+    post:
+      description: Logging in
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInputBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Session"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      summary: Log in
+      tags:
+        - Authorization
+  /logout:
+    get:
+      description: Logging out
+      operationId: logout
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessOutputBody"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Log out
+      tags:
+        - Authorization
+  /project:
+    get:
+      description: Get support project
+      operationId: list-projects
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Project"
+                type:
+                  - array
+                  - "null"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: List project
+      tags:
+        - Project
+  /project/{id}:
+    get:
+      description: Get support project
+      operationId: get-project
+      parameters:
+        - description: ID
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            description: ID
+            examples:
+              - 1
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Get project
+      tags:
+        - Project
+  /register:
+    post:
+      description: Register a user
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserInputBody"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      summary: Register
+      tags:
+        - Authorization
+  /role:
+    get:
+      description: Get user support role
+      operationId: get-user-role
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserWithRoleInfo"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Get user role
+      tags:
+        - User
+        - Roles
+  /role/{id}:
+    get:
+      description: Get support role
+      operationId: get-role
+      parameters:
+        - description: ID
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            description: ID
+            examples:
+              - 1
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Role"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Get role
+      tags:
+        - Roles
+  /ticket:
+    get:
+      description: Get support tickets
+      operationId: list-tickets
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SupportTicket"
+                type:
+                  - array
+                  - "null"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: List tickets
+      tags:
+        - Support
+    post:
+      description: Create support ticket with a starting status with 0
+      operationId: create-ticket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSupportTicketInputBody"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportTicket"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Create ticket
+      tags:
+        - Support
+  /ticket/{id}:
+    delete:
+      description: Delete support ticket
+      operationId: list-tickets
+      parameters:
+        - description: ID
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            description: ID
+            examples:
+              - 1
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessOutputBody"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Delete ticket
+      tags:
+        - Support
+    get:
+      description: Get support ticket
+      operationId: get-ticket
+      parameters:
+        - description: ID
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            description: ID
+            examples:
+              - 1
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportTicket"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Get ticket
+      tags:
+        - Support
+    put:
+      description: Update support ticket
+      operationId: update-ticket
+      parameters:
+        - description: ID of support ticket
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            description: ID of support ticket
+            examples:
+              - 1
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSupportTicketInputBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupportTicket"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: Update ticket
+      tags:
+        - Support
+  /user-project:
+    get:
+      description: Get all user project bindings
+      operationId: list-user-project
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Project"
+                type:
+                  - array
+                  - "null"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Error
+      security:
+        - auth:
+            - auth
+      summary: List user project
+      tags:
+        - User
+        - Project
